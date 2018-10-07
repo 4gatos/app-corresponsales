@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import '../styles/main.styl';
 import Header from '../components/basics/Header';
 import Footer from '../components/basics/Footer';
+import '../styles/main.styl';
 
 class Main extends Component {
   constructor(props) {

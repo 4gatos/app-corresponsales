@@ -3,10 +3,8 @@ import React from 'react';
 const Header = () => (
   <header>
     <div>
-      <img src="" alt="" />
-      <button>
-        Hola
-      </button>
+      <img src="/static/img/logo.svg" alt="CEU" />
+      <span className="icon-filter" />
     </div>
   </header>
 );

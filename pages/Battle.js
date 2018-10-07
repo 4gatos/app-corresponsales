@@ -18,6 +18,7 @@ class Battle extends Component {
           <h1>Batalla de Villar de los Navarros</h1>
           <Card title="Ficha técnica">
             <p>Prueba</p>
+            <a href="#f">Prueba</a>
           </Card>
           <Card title="Historia" collapsible>
             <p>

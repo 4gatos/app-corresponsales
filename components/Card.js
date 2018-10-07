@@ -34,7 +34,11 @@ class Card extends Component {
         <div className="wrapper">
           <div className="card-title">
             <h3>{title}</h3>
-            {collapsible && <button type="button" onClick={this.toggleCollapsed}>!!</button>}
+            {collapsible && (
+              <button className={`btn-collapsible${collapsed ? '' : ' turned'}`} type="button" onClick={this.toggleCollapsed}>
+                <span className="icon-arrowcollapsible" />
+              </button>
+            )}
           </div>
           <div className={`card-body${collapsed ? ' collapsed' : ''}`} ref={this.cardBody}>
             {children}

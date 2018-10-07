@@ -14,10 +14,10 @@ class Footer extends Component {
       <footer>
         <div className="tabs">
           <div className="tab">
-            <i className="icon map" />
+            <span className="icon-map-pointer" />
           </div>
           <div className="tab">
-            <i className="icon list" />
+            <span className="icon-list" />
           </div>
         </div>
       </footer>
