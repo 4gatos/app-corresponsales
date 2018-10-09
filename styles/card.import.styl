@@ -44,3 +44,26 @@
     p
       &:last-child
         margin-bottom 0
+
+    .block-link 
+      display block
+
+    .data-list
+      list-style none
+      margin-bottom 0
+      padding-left 0
+
+      &:not(:last-child)
+        margin-bottom $xs
+
+      .item
+        display flex
+        margin-bottom $xs
+      
+        &:last-child
+          margin-bottom 0
+
+        .icon
+          color $primary
+          padding-right $xs
+          line-height 1.5

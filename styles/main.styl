@@ -1,3 +1,10 @@
+button
+  background none
+  border none
+  outline none !important
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
 @import "variables.import.styl"
 @import "fonts.import.styl"
 @import "icons.import.styl"
@@ -9,3 +16,10 @@
 @import "header.import.styl"
 @import "footer.import.styl"
 @import "card.import.styl"
+
+html body
+  color $textGrey
+
+.link
+  &.active
+    color $primary

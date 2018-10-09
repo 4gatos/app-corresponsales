@@ -1,32 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import CustomLink from './CustomLink';
 
-class Footer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentTab: '',
-    };
-  }
-
-  render() {
-    return (
-      <footer>
-        <div className="tabs">
-          <div className="tab">
-            <span className="icon-map-pointer" />
-          </div>
-          <div className="tab">
-            <span className="icon-list" />
-          </div>
-        </div>
-      </footer>
-    );
-  }
-}
-
-Footer.propTypes = {
-
-};
+const Footer = () => (
+  <nav>
+    <div className="tabs">
+      <div className="tab">
+        <CustomLink route="map">
+          <span className="icon icon-map-pointer" />
+        </CustomLink>
+      </div>
+      <div className="tab">
+        <CustomLink route="list">
+          <span className="icon icon-list" />
+        </CustomLink>
+      </div>
+    </div>
+  </nav>
+);
 
 export default Footer;

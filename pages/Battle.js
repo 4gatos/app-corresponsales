@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../components/Card';
+import ListItem from '../components/ListItem';
+import DataList from '../components/DataList';
 
 class Battle extends Component {
   constructor(props) {
@@ -17,8 +19,11 @@ class Battle extends Component {
           </div>
           <h1>Batalla de Villar de los Navarros</h1>
           <Card title="Ficha técnica">
-            <p>Prueba</p>
-            <a href="#f">Prueba</a>
+            <DataList>
+              <ListItem text="Villar de los Navarros" icon="icon-pointer" />
+              <ListItem text="24 de agosto de 1837" icon="icon-calendar" />
+              <ListItem text="7 horas" icon="icon-tempus-fugit" />
+            </DataList>
           </Card>
           <Card title="Historia" collapsible>
             <p>
@@ -35,15 +40,33 @@ class Battle extends Component {
           <Card title="Patrimonio arquitectónico" collapsible>
             <img src="https://via.placeholder.com/350x200" alt="Batalla" />
             <p>Iglesia de San Pedro (mudéjar, BIC), ermitas de Santa Bárbara y de Santa Ana, santuario de la Virgen de Herrera, Vía Crucis y Calvario, peirones, puente, matadero, fábrica de anís.</p>
+            <a href="#" className="block-link">Ver más construcciones</a>
+            <a href="#" className="block-link">Las neveras</a>
           </Card>
           <Card title="Patrimonio natural" collapsible>
-            <p>Prueba</p>
+            <img src="https://via.placeholder.com/350x200" alt="Batalla" />
+            <p>Zona LIC (Lugar de Interés Comunitario) Alto Huerva y Sierra de Herrera al oeste de Villar de los Navarros.</p>
+            <a href="#" className="block-link">Ver más</a>
+            <img src="https://via.placeholder.com/350x200" alt="Batalla" />
+            <p>Sierra de Herrera.</p>
+            <a href="#" className="block-link">Ver más</a>
           </Card>
           <Card title="Personas relevantes que intervienen" collapsible>
             <p>Expedición Real, Carlos María Isidro, infante Sebastián Gabriel de Borbón, José Buerens, Joaquín Quílez.</p>
           </Card>
           <Card title="Número de efectivos" collapsible>
-            <p>Prueba</p>
+            <p><strong>Carlistas</strong></p>
+            <DataList>
+              <ListItem text="11.000 soldados" icon="icon-soldier" />
+              <ListItem text="1.500 caballos" icon="icon-horse" />
+              <ListItem text="4 cañones" icon="icon-cannon" />
+            </DataList>
+            <p><strong>Isabelinos</strong></p>
+            <DataList>
+              <ListItem text="7.000 soldados" icon="icon-soldier" />
+              <ListItem text="800 caballos" icon="icon-horse" />
+              <ListItem text="6 cañones" icon="icon-cannon" />
+            </DataList>
           </Card>
         </div>
       </div>
