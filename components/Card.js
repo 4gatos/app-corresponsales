@@ -13,14 +13,14 @@ class Card extends Component {
     this.toggleCollapsed = this.toggleCollapsed.bind(this);
   }
 
-  componentDidMount() {
-    const { collapsible } = this.props;
+  // componentDidMount() {
+  //   const { collapsible } = this.props;
 
-    if (collapsible) {
-      const height = this.cardBody.current.clientHeight;
-      this.cardBody.current.style.height = `${height}px`;
-    }
-  }
+  //   if (collapsible) {
+  //     const height = this.cardBody.current.clientHeight;
+  //     this.cardBody.current.style.height = `${height}px`;
+  //   }
+  // }
 
   toggleCollapsed() {
     this.setState(prevState => ({ collapsed: !prevState.collapsed }));

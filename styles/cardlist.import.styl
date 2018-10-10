@@ -1,0 +1,29 @@
+.list-cards
+  margin-top $m
+  margin-bottom $m
+  .list-card-item
+    width 100%
+    display flex
+    flex-direction column
+    background-color $white
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 0 2px 0 rgba(0,0,0,0.12);
+
+    &:not(:last-child)
+      margin-bottom $m
+
+    .list-card-header
+      max-height 160px
+      width 100%
+      display flex
+      justify-content center
+      align-items center
+      overflow hidden
+      
+      img
+        width 100%
+
+    .list-card-body
+      padding $s
+
+      h4
+        font-size 1.5rem

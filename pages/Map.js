@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link } from '../routes/routes';
 
 const Map = () => (
-  <div>
-    <h1 style={{ 'margin-top': '50px' }}>Home</h1>
+  <div className="main-map">
+    <Link route="list">
+      <img src="/static/img/mapaintro.jpg" alt="mapa" />
+    </Link>
   </div>
 );
 

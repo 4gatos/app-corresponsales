@@ -8,12 +8,16 @@ import routeList from '../../routes/index.json';
 const CustomLink = ({ route, children, params }) => {
   let page = '';
   let isActive = '';
+  const linkProps = {
+    ...(route ? { route } : null),
+    ...(params ? { params } : null),
+  };
   if (process.browser) {
     page = Router.route;
     isActive = `/${routeList[route].page}` === page;
   }
   return (
-    <Link route={route} params={params}>
+    <Link {...linkProps}>
       <a className={`link${isActive ? ' active' : ''}`}>
         {children}
       </a>

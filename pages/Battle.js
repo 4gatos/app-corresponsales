@@ -10,12 +10,22 @@ class Battle extends Component {
     this.state = {};
   }
 
+  componentWillMount() {
+    const { showBackButton } = this.props;
+    showBackButton();
+  }
+
+  componentWillUnmount() {
+    const { hideBackButton } = this.props;
+    hideBackButton();
+  }
+
   render() {
     return (
       <div className="sheet battle">
         <div className="container">
           <div className="main-img">
-            <img src="https://via.placeholder.com/350x200" alt="Batalla" />
+            <img src="/static/img/batalla.jpg" alt="Batalla" />
           </div>
           <h1>Batalla de Villar de los Navarros</h1>
           <Card title="Ficha técnica">
@@ -35,19 +45,20 @@ class Battle extends Component {
           </Card>
           <Card title="Descripción geográfica" collapsible>
             <p>Villar de los Navarros está a 72 km. de Zaragoza, al pie de la sierra de Herrera (Sistema Ibérico), y en el límite con la provincia de Teruel, junto al río Cámaras (afluente del Aguasvivas), a una altitud de 867 metros. La batalla tuvo lugar entre las partidas de Valdenavarra (Val de Navarra) y Caña de la Cruz, a medio camino entre Villar de los Navarros y Herrera de los Navarros, a los pies del santuario de la Virgen de la Sierra y cerca de las sierras de Oriche y Cucalón.</p>
-            <img src="https://via.placeholder.com/350x200" alt="Batalla" />
+            <img src="/static/img/mapabatallla.jpg" alt="Batalla" />
+            <p></p>
           </Card>
           <Card title="Patrimonio arquitectónico" collapsible>
-            <img src="https://via.placeholder.com/350x200" alt="Batalla" />
+            <img src="/static/img/patrimonioarq.jpg" alt="Batalla" />
             <p>Iglesia de San Pedro (mudéjar, BIC), ermitas de Santa Bárbara y de Santa Ana, santuario de la Virgen de Herrera, Vía Crucis y Calvario, peirones, puente, matadero, fábrica de anís.</p>
             <a href="#" className="block-link">Ver más construcciones</a>
             <a href="#" className="block-link">Las neveras</a>
           </Card>
           <Card title="Patrimonio natural" collapsible>
-            <img src="https://via.placeholder.com/350x200" alt="Batalla" />
+            <img src="/static/img/patrimonionat.jpg" alt="Batalla" />
             <p>Zona LIC (Lugar de Interés Comunitario) Alto Huerva y Sierra de Herrera al oeste de Villar de los Navarros.</p>
             <a href="#" className="block-link">Ver más</a>
-            <img src="https://via.placeholder.com/350x200" alt="Batalla" />
+            <img src="/static/img/patrimonionat2.jpg" alt="Batalla" />
             <p>Sierra de Herrera.</p>
             <a href="#" className="block-link">Ver más</a>
           </Card>
@@ -75,7 +86,8 @@ class Battle extends Component {
 }
 
 Battle.propTypes = {
-
+  showBackButton: PropTypes.func.isRequired,
+  hideBackButton: PropTypes.func.isRequired,
 };
 
 export default Battle;
