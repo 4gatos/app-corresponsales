@@ -1,5 +1,5 @@
 {
-  "map": { "pattern": "/", "page": "Map" },
+  "map": { "pattern": "/", "page": "MapView" },
   "list": { "pattern": "/lista", "page": "List" },
   "battle": { "pattern": "/batalla/:id", "page": "Battle" },
   "correspondent": { "pattern": "/corresponsal/:id", "page": "Correspondent" }
