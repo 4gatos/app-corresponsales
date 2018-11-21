@@ -1,9 +1,9 @@
 const express = require('express');
 const next = require('next');
 const routes = require('./routes/routes');
+const config = require('./config/index.js');
 
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
+const app = next({ dev: process.env.NODE_ENV !== 'production' });
 const handle = app.getRequestHandler();
 const handler = routes.getRequestHandler(app);
 
@@ -14,8 +14,8 @@ app.prepare()
 
     server.get('*', (req, res) => handle(req, res));
 
-    server.listen(3000, (err) => {
+    server.listen(config.port, (err) => {
       if (err) throw err;
-      console.log('> Ready on http://localhost:3000');
+      console.log('> Ready');
     });
   });
