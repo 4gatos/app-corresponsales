@@ -1,6 +1,12 @@
 .list-cards
   margin-top $m
   margin-bottom $m
+
+  @media (min-width $minDesk)
+    display flex
+    flex-wrap wrap
+    justify-content space-between
+
   .list-card-item
     width 100%
     display flex
@@ -8,7 +14,20 @@
     background-color $white
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 0 2px 0 rgba(0,0,0,0.12);
 
-    &:not(:last-child)
+    @media (max-width $maxTablet)
+      &:not(:last-child)
+        margin-bottom $m
+
+    @media (min-width $minDesk)
+      width calc(50% - 12px)
+      margin-bottom $m
+
+    @media (min-width $minDeskHD)
+      width calc(33% - 12px)
+      margin-bottom $m
+
+    @media (min-width $minDeskUltraHD)
+      width calc(25% - 12px)
       margin-bottom $m
 
     .list-card-header
@@ -18,6 +37,7 @@
       justify-content center
       align-items center
       overflow hidden
+      cursor pointer
       
       img
         width 100%
@@ -27,3 +47,11 @@
 
       h4
         font-size 1.5rem
+      
+      p
+        overflow hidden
+        display block
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;  
+        max-height 200px

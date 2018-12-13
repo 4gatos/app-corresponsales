@@ -8,10 +8,10 @@ const Header = ({ backButton }) => (
     <div>
       { backButton
         ? <span role="button" className="icon-back" onClick={goBack} />
-        : ([
-          <img src="/static/img/logo.png" alt="CEU" key="logo" />,
-          <span className="icon-filter" key="filter" />,
-        ])
+        : (
+          <img src="/static/img/logo.png" alt="CEU" key="logo" />
+          // <span className="icon-filter" key="filter" />,
+        )
       }
     </div>
   </header>

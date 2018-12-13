@@ -6,6 +6,12 @@ header
   top 0
   z-index $header
 
+  @media (min-width $minDesk)
+    height 70px
+
+    img
+      65px
+
   > div
     color $white
     display flex
@@ -15,7 +21,7 @@ header
     padding 0 $m
 
     img
-      height 36px
+      height 50px
 
     span:before
       font-size 1.5rem

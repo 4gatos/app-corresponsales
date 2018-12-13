@@ -1,69 +1,81 @@
-.card
-  background-color $white
-  padding $m
-  margin $m 0
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 0 2px 0 rgba(0,0,0,0.12)
-  border-radius: 2px
-  transition all 0.3s ease-out
-
-  .card-title
+.cards
+  @media (min-width $minDesk)
     display flex
+    flex-wrap wrap
     justify-content space-between
-    align-items center
-    margin-bottom $s
 
-    & ~ .collapsed
-      margin-bottom 0
+  .card
+    @media (min-width $minDesk)
+      width calc(50% - 16px)
 
-    h3
-      margin-bottom 0
-      padding-right $xs
+      &:not(.collapsible)
+        width 100%
 
-    button
-      padding 0 8px
-      transition all 0.2s ease-in
-
-      &.turned
-        transform rotateX(180deg)
-
-  .card-body
+    background-color $white
+    padding $m
+    margin $s 0
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 0 2px 0 rgba(0,0,0,0.12)
+    border-radius: 2px
     transition all 0.3s ease-out
-    overflow hidden
-    &.collapsed
-      height 0 !important
-      opacity 0
-    img
-      margin $m 0
 
-      &:first-child
-        margin-top 0
+    .card-title
+      display flex
+      justify-content space-between
+      align-items center
+      margin-bottom $s
 
-      &:last-child
+      & ~ .collapsed
         margin-bottom 0
 
-    p
-      &:last-child
+      h3
         margin-bottom 0
+        padding-right $xs
 
-    .block-link 
-      display block
+      button
+        padding 0 8px
+        transition all 0.2s ease-in
 
-    .data-list
-      list-style none
-      margin-bottom 0
-      padding-left 0
+        &.turned
+          transform rotateX(180deg)
 
-      &:not(:last-child)
-        margin-bottom $xs
+    .card-body
+      transition all 0.3s ease-out
+      overflow hidden
+      &.collapsed
+        height 0 !important
+        opacity 0
+      img
+        margin $m 0
 
-      .item
-        display flex
-        margin-bottom $xs
-      
+        &:first-child
+          margin-top 0
+
         &:last-child
           margin-bottom 0
 
-        .icon
-          color $primary
-          padding-right $xs
-          line-height 1.5
+      p
+        &:last-child
+          margin-bottom 0
+
+      .block-link 
+        display block
+
+      .data-list
+        list-style none
+        margin-bottom 0
+        padding-left 0
+
+        &:not(:last-child)
+          margin-bottom $xs
+
+        .item
+          display flex
+          margin-bottom $xs
+        
+          &:last-child
+            margin-bottom 0
+
+          .icon
+            color $primary
+            padding-right $xs
+            line-height 1.5

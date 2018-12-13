@@ -4,22 +4,13 @@ import MapPopUp from './MapPopUp';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicGxhc28iLCJhIjoiY2puZG0weXZ1Mjl6aDNxcmZybXV0NmV6NCJ9.Vovat6h7DIDOWpa5j4P0_Q';
 
-const battles = [
-  {
-    title: 'Batalla de Villar de los Navarros',
-    description:
-      'La batalla de Villar de los Navarros enfrentó a carlistas y liberales durante la primera guerra.',
-    slug: 'villar-de-los-navarros',
-    coords: [-1.0880680304, 41.1779158187],
-  },
-];
-
 const defaultPopUpState = {
   isPopUpOpen: false,
   popUpTitle: null,
   popUpDescription: null,
   popUpRoute: null,
   popUpSlug: null,
+  popUpImg: null,
 };
 
 class Map extends Component {
@@ -39,6 +30,7 @@ class Map extends Component {
 
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
+    const { battles, correspondants } = this.props;
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -60,7 +52,8 @@ class Map extends Component {
     new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map);
 
     battles.forEach((battle) => {
-      const marker = new mapboxgl.Marker().setLngLat(battle.coords).addTo(map);
+      const marker = new mapboxgl.Marker()
+        .setLngLat([battle.geographicLng, battle.geographicLat]).addTo(map);
 
       marker
         .getElement()
@@ -71,10 +64,11 @@ class Map extends Component {
   setPopUp(battle) {
     this.setState({
       isPopUpOpen: true,
-      popUpTitle: battle.title,
-      popUpDescription: battle.description,
+      popUpTitle: battle.name,
+      popUpDescription: battle.history,
       popUpRoute: 'battle',
       popUpSlug: battle.slug,
+      popUpImg: battle.mainImg,
     });
   }
 
@@ -89,6 +83,7 @@ class Map extends Component {
       popUpDescription,
       popUpRoute,
       popUpSlug,
+      popUpImg,
     } = this.state;
     return [
       <div
@@ -102,6 +97,7 @@ class Map extends Component {
           route={popUpRoute}
           slug={popUpSlug}
           closePopUp={this.closePopUp}
+          popUpImg={popUpImg}
         />
       ),
     ];
