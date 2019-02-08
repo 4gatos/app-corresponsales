@@ -17,8 +17,8 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: -1.0880680304,
-      lat: 41.1779158187,
+      lng: -3.7033387,
+      lat: 40.4167278,
       zoom: 6,
       ...defaultPopUpState,
     };
@@ -26,6 +26,9 @@ class Map extends Component {
     this.map = React.createRef();
     this.setPopUp = this.setPopUp.bind(this);
     this.closePopUp = this.closePopUp.bind(this);
+    this.createMapMarkers = this.createMapMarkers.bind(this);
+
+    this.markers = [];
   }
 
   componentDidMount() {
@@ -49,26 +52,39 @@ class Map extends Component {
       });
     });
 
-    new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map);
+    this.createMapMarkers(battles, 'battle', map);
+    this.createMapMarkers(correspondants, 'correspondent', map);
 
-    battles.forEach((battle) => {
-      const marker = new mapboxgl.Marker()
-        .setLngLat([battle.geographicLng, battle.geographicLat]).addTo(map);
+    console.log(this.markers);
 
-      marker
-        .getElement()
-        .addEventListener('click', () => this.setPopUp(battle), false);
+    map.fitBounds(this.markers, { padding: 60 });
+  }
+
+  setPopUp(item, route) {
+    this.setState({
+      isPopUpOpen: true,
+      popUpTitle: item.name,
+      popUpDescription: item.history,
+      popUpRoute: route,
+      popUpSlug: item.slug,
+      popUpImg: item.mainImg,
     });
   }
 
-  setPopUp(battle) {
-    this.setState({
-      isPopUpOpen: true,
-      popUpTitle: battle.name,
-      popUpDescription: battle.history,
-      popUpRoute: 'battle',
-      popUpSlug: battle.slug,
-      popUpImg: battle.mainImg,
+  createMapMarkers(data, type, map) {
+    data.forEach((item) => {
+      const el = document.createElement('div');
+      el.className = `marker ${type}`;
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([item.geographicLng, item.geographicLat]).addTo(map);
+
+      console.log( item.geographicLng );
+
+      this.markers.push([item.geographicLng, item.geographicLat]);
+
+      marker
+        .getElement()
+        .addEventListener('click', () => this.setPopUp(item, type), false);
     });
   }
 

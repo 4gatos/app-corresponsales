@@ -1,6 +1,7 @@
 {
   "map": { "pattern": "/", "page": "MapView" },
+  "onboarding": { "pattern": "/inicio", "page": "OnBoarding" },
   "list": { "pattern": "/lista", "page": "List" },
-  "battle": { "pattern": "/batalla/:id", "page": "Battle" },
+  "battle": { "pattern": "/hito/:id", "page": "Battle" },
   "correspondent": { "pattern": "/corresponsal/:id", "page": "Correspondent" }
 }
