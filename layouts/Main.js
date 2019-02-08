@@ -26,7 +26,7 @@ class Main extends Component {
     const { children } = this.props;
     const { backButton } = this.state;
     return (
-      <div>
+      <div className="mainLayout">
         <Header backButton={backButton} />
         <section className="mainContent">
           {React.Children.map(children, child => React.cloneElement(child, {
