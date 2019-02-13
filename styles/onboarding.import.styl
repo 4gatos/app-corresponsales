@@ -14,6 +14,38 @@
   background-size cover
   background-position top right
 
+  .onboarding-route
+    margin-top $m
+    text-align center
+
+    @media (max-width $maxTablet)
+      display none
+
+  .steps
+    display flex
+    flex-wrap wrap
+
+    .step
+      @media (max-width $maxTablet)
+        &:not(.current)
+          display none
+      
+      width 100%
+
+      .step-icon
+        text-align center
+        margin-bottom $m
+
+        .icon
+          font-size 100px
+          color $white
+
+      @media (min-width $minDesk)
+        width 33%
+
+        .onboarding-buttons
+          display none
+
   .onboarding-texts
     text-align center
     color $white
@@ -22,6 +54,9 @@
     display flex
     flex-direction column
     align-items center
+
+    .btn
+      cursor pointer
 
     a:not(:first-child)
       margin-top $s

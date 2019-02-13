@@ -19,7 +19,7 @@ class Map extends Component {
     this.state = {
       lng: -3.7033387,
       lat: 40.4167278,
-      zoom: 6,
+      zoom: 3,
       ...defaultPopUpState,
     };
 
@@ -53,7 +53,7 @@ class Map extends Component {
     });
 
     this.createMapMarkers(battles, 'battle', map);
-    this.createMapMarkers(correspondants, 'correspondent', map);
+    // this.createMapMarkers(correspondants, 'correspondent', map);
 
     console.log(this.markers);
 
@@ -77,8 +77,6 @@ class Map extends Component {
       el.className = `marker ${type}`;
       const marker = new mapboxgl.Marker(el)
         .setLngLat([item.geographicLng, item.geographicLat]).addTo(map);
-
-      console.log( item.geographicLng );
 
       this.markers.push([item.geographicLng, item.geographicLat]);
 

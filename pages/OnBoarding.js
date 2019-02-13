@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from '../routes/routes';
 
 class OnBoarding extends Component {
   constructor(props) {
@@ -11,6 +12,11 @@ class OnBoarding extends Component {
     document.querySelector('nav').classList.add('hidden');
   }
 
+  componentWillUnmount() {
+    document.querySelector('header').classList.remove('hidden');
+    document.querySelector('nav').classList.remove('hidden');
+  }
+
   render() {
     return (
       <div className="onboarding">
@@ -20,8 +26,11 @@ class OnBoarding extends Component {
             <p>En esta aplicación podrás revivir las batallas que ocurrieron durante las guerras carlistas en España y descubrir datos importantes como su localización o participantes.</p>
           </div>
           <div className="onboarding-buttons">
-            <a className="btn outline">Empezar</a>
-            <a className="btn outline">Saber más</a>
+            <Link route="steps">
+              <a className="btn outline">Empezar</a>
+            </Link>
+            {/* //TODO */}
+            {/* <a className="btn outline">Saber más</a> */}
           </div>
         </div>
       </div>

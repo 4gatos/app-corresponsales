@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-unfetch';
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
+import Router from 'next/router';
 import config from '../config/index';
 
 let Map;
@@ -13,6 +14,12 @@ class MapView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    if (!localStorage.getItem('onboarding')) {
+      Router.push('/inicio');
+    }
   }
 
   render() {
