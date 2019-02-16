@@ -73,16 +73,18 @@ class Map extends Component {
 
   createMapMarkers(data, type, map) {
     data.forEach((item) => {
-      const el = document.createElement('div');
-      el.className = `marker ${type}`;
-      const marker = new mapboxgl.Marker(el)
-        .setLngLat([item.geographicLng, item.geographicLat]).addTo(map);
+      if (item.geographicLat && item.geographicLng) {
+        const el = document.createElement('div');
+        el.className = `marker ${type}`;
+        const marker = new mapboxgl.Marker(el)
+          .setLngLat([item.geographicLng, item.geographicLat]).addTo(map);
 
-      this.markers.push([item.geographicLng, item.geographicLat]);
+        this.markers.push([item.geographicLng, item.geographicLat]);
 
-      marker
-        .getElement()
-        .addEventListener('click', () => this.setPopUp(item, type), false);
+        marker
+          .getElement()
+          .addEventListener('click', () => this.setPopUp(item, type), false);
+      }
     });
   }
 

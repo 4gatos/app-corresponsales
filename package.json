@@ -10,7 +10,7 @@
     "@zeit/next-stylus": "^1.0.1",
     "autoprefixer-stylus": "^0.14.0",
     "babel-eslint": "^10.0.1",
-    "cloudinary-react": "^1.0.6",
+    "cloudinary-react": "^1.1.0",
     "express": "^4.16.3",
     "html-react-parser": "^0.4.7",
     "isomorphic-unfetch": "^3.0.0",
