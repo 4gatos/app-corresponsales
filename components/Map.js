@@ -28,13 +28,14 @@ class Map extends Component {
     this.closePopUp = this.closePopUp.bind(this);
     this.createMapMarkers = this.createMapMarkers.bind(this);
 
+    this.bounds = new mapboxgl.LngLatBounds();
+
     this.markers = [];
   }
 
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
     const { battles, correspondants } = this.props;
-    console.log(correspondants);
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -56,9 +57,8 @@ class Map extends Component {
     this.createMapMarkers(battles, 'battle', map);
     this.createMapMarkers(correspondants, 'correspondent', map);
 
-    console.log(this.markers);
 
-    map.fitBounds(this.markers, { padding: 60 });
+    map.fitBounds(this.bounds, { padding: 60 });
   }
 
   setPopUp(item, route) {
@@ -88,6 +88,7 @@ class Map extends Component {
         }
 
         this.markers.push([item.geographicLng, item.geographicLat]);
+        this.bounds.extend([item.geographicLng, item.geographicLat]);
 
         marker
           .getElement()
