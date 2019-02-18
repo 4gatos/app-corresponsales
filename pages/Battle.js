@@ -32,7 +32,6 @@ class Battle extends Component {
 
   render() {
     const { battle } = this.props;
-    console.log({ battle });
     return (
       <CloudinaryContext cloudName="plasocloudinary">
         <div className="sheet battle">

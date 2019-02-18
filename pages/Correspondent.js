@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import fetch from 'isomorphic-unfetch';
+import dynamic from 'next/dynamic';
 import { CloudinaryContext, Image } from 'cloudinary-react';
 import Card from '../components/Card';
 import DataList from '../components/DataList';
 import ListItem from '../components/ListItem';
 import config from '../config/index';
 import Markdown from '../components/basics/Markdown';
+import { Link } from '../routes/routes';
+
+let PositionMap;
+if (process.browser) {
+  PositionMap = dynamic(() => import('../components/PositionMap'));
+}
 
 
 class Correspondent extends Component {
@@ -26,7 +33,8 @@ class Correspondent extends Component {
   }
 
   render() {
-    const { correspondant } = this.props;
+    const { correspondant } = this.props;
+    console.log(correspondant);
     return (
       <CloudinaryContext cloudName="plasocloudinary">
         <div className="sheet correspondent">
@@ -48,21 +56,45 @@ class Correspondent extends Component {
               <Card title="Detalles Históricos" collapsible>
                 <Markdown string={correspondant.historicDetails} />
               </Card>
-              <Card title="Batalla: Villar de los Navarros" collapsible>
-                <img src="/static/img/mapabatallla.jpg" alt="Batalla" />
-                <p>Iglesia de San Pedro (mudéjar, BIC), ermitas de Santa Bárbara y de Santa Ana, santuario de la Virgen de Herrera, Vía Crucis y Calvario, peirones, puente, matadero, fábrica de anís.</p>
-                <a href="#" className="block-link">Ver más</a>
-              </Card>
+              {correspondant.battle && (
+                <Card title={`Batalla: ${correspondant.battle.name}`} collapsible>
+                  {process.browser && (
+                    <PositionMap
+                      lng={correspondant.battle.geographicLng}
+                      lat={correspondant.battle.geographicLat}
+                      type="battle"
+                      zoom={6}
+                    />
+                  )}
+                  <p>{correspondant.battle.history}</p>
+                  <Link route="battle" params={{ id: correspondant.battle.slug }}>
+                    <a className="block-link">Ver más</a>
+                  </Link>
+                </Card>
+              )}
               <Card title="Ruta del corresponsal" collapsible>
                 <Markdown string={correspondant.geographicDescription} />
-                <img src="/static/img/mapabatallla.jpg" alt="Batalla" />
+                {process.browser && (
+                  <PositionMap
+                    lng={correspondant.geographicLng || correspondant.coordinates[0][0]}
+                    lat={correspondant.geographicLat || correspondant.coordinates[0][1]}
+                    {...(correspondant.coordinates && correspondant.coordinates.length > 0
+                      ? { coordinates: correspondant.coordinates } : null)
+                    }
+                    type="correspondent"
+                    zoom={6}
+                  />
+                )}
               </Card>
-              <Card title="Documentación" collapsible>
-                <Markdown string={correspondant.documentation} />
-                <img src="/static/img/batalla.jpg" alt="Batalla" />
-                <a href="#" className="block-link interest-link">Enlace de interés</a>
-                <a href="#" className="block-link interest-link">Enlace de interés</a>
-              </Card>
+              {correspondant && correspondant.otherFields
+                && correspondant.otherFields.length > 0 && (
+                correspondant.otherFields.map(({ title, body, img }) => (
+                  <Card title={title} collapsible>
+                    <p>{body}</p>
+                    {img && (<Image publicId={img} />)}
+                  </Card>
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -74,10 +106,11 @@ class Correspondent extends Component {
 Correspondent.propTypes = {
   showBackButton: PropTypes.func.isRequired,
   hideBackButton: PropTypes.func.isRequired,
+  correspondant: PropTypes.shape({}).isRequired,
 };
 
 Correspondent.getInitialProps = async ({ query }) => {
-  const correspondantRes = await fetch(`${config.apiUrl}/correspondants/${query.id}`);
+  const correspondantRes = await fetch(`${config.apiUrl}/correspondants/${query.id}/basic`);
   const correspondant = await correspondantRes.json();
 
   return {

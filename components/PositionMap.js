@@ -7,7 +7,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicGxhc28iLCJhIjoiY2puZG0weXZ1Mjl6aDNxcmZybXV0N
 class PositionMap extends Component {
   componentDidMount() {
     const {
-      lng, lat, type, zoom,
+      lng, lat, type, zoom, coordinates,
     } = this.props;
 
     const map = new mapboxgl.Map({
@@ -21,6 +21,37 @@ class PositionMap extends Component {
     el.className = `marker ${type}`;
     new mapboxgl.Marker(el)
       .setLngLat([lng, lat]).addTo(map);
+
+    if (coordinates) {
+      map.on('load', () => {
+        map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates,
+              },
+            },
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': '#00A8E1',
+            'line-opacity': 0.75,
+            'line-width': 5,
+          },
+        });
+      });
+    } else {
+      map.flyTo({ center: [lng, lat] });
+    }
   }
 
   render() {

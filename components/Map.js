@@ -34,6 +34,7 @@ class Map extends Component {
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
     const { battles, correspondants } = this.props;
+    console.log(correspondants);
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -53,7 +54,7 @@ class Map extends Component {
     });
 
     this.createMapMarkers(battles, 'battle', map);
-    // this.createMapMarkers(correspondants, 'correspondent', map);
+    this.createMapMarkers(correspondants, 'correspondent', map);
 
     console.log(this.markers);
 
@@ -73,11 +74,18 @@ class Map extends Component {
 
   createMapMarkers(data, type, map) {
     data.forEach((item) => {
-      if (item.geographicLat && item.geographicLng) {
+      if (
+        (item.geographicLat && item.geographicLng)
+        || (item.coordinates && item.coordinates.length > 0)
+      ) {
         const el = document.createElement('div');
         el.className = `marker ${type}`;
-        const marker = new mapboxgl.Marker(el)
-          .setLngLat([item.geographicLng, item.geographicLat]).addTo(map);
+        const marker = new mapboxgl.Marker(el);
+        if (item.geographicLat && item.geographicLng) {
+          marker.setLngLat([item.geographicLng, item.geographicLat]).addTo(map);
+        } else {
+          marker.setLngLat([item.coordinates[0][0], item.coordinates[0][1]]).addTo(map);
+        }
 
         this.markers.push([item.geographicLng, item.geographicLat]);
 
