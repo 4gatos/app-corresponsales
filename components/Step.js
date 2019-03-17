@@ -17,7 +17,7 @@ const Step = ({
       </p>
     </div>
     <div className="onboarding-buttons">
-      {step === 3 ? (
+      {step === 4 ? (
         <Link route="map">
           <a className="btn outline">Comenzar</a>
         </Link>

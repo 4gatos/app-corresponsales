@@ -2,6 +2,29 @@ import React, { Component } from 'react';
 import Step from '../components/Step';
 import { Link } from '../routes/routes';
 
+const steps = [
+  {
+    icon: 'feather',
+    title: 'Corresponsales',
+    body: 'Descubre al detalle todo lo acontecido: imágenes de los hitos históricos, personajes involucrados e historias ocultas',
+  },
+  {
+    icon: 'swords',
+    title: 'Hitos',
+    body: 'Nos acercamos a los acontecimientos más importantes de la guerra: batallas, expediciones, sitios, resistencia de las ciudades, estado de las tropas o de la población civil.',
+  },
+  {
+    icon: 'lens',
+    title: 'Fuentes',
+    body: '¿A través de qué fuentes reciben los periódicos sus informaciones sobre la Primera Guerra Carlista?, ¿de qué fuentes reciben los diarios la información?',
+  },
+  {
+    icon: 'newspaper',
+    title: 'Periódicos',
+    body: 'Aproximación a la historia de los periódicos que cubrieron -o publicaron informaciones- sobre la Primera Guerra Carlista',
+  },
+];
+
 class Steps extends Component {
   constructor(props) {
     super(props);
@@ -34,30 +57,16 @@ class Steps extends Component {
       <div className="onboarding">
         <div className="container">
           <div className="steps">
-            <Step
-              setStep={this.setStep}
-              step={1}
-              currentStep={currentStep}
-              icon="icon-feather"
-              title="1. Corresponsales"
-              body="Descubre al detalle todo lo acontecido: imágenes de los hitos históricos, personajes involucrados e historias ocultas"
-            />
-            <Step
-              setStep={this.setStep}
-              step={2}
-              currentStep={currentStep}
-              icon="icon-map"
-              title="2. Rutas"
-              body="Selecciona el hito histórico que te interese y descubre estadísticas, localizaciones, etc."
-            />
-            <Step
-              setStep={this.setStep}
-              step={3}
-              currentStep={currentStep}
-              icon="icon-swords"
-              title="3. Hitos"
-              body="Selecciona hitos históricos que ocurrieron en España durante las Guerras Carlistas."
-            />
+            {steps.map(({ icon, title, body }, index) => (
+              <Step
+                setStep={this.setStep}
+                step={index + 1}
+                currentStep={currentStep}
+                icon={`icon-${icon}`}
+                title={`${index + 1}. ${title}`}
+                body={body}
+              />
+            ))}
           </div>
           <div className="onboarding-route">
             <Link route="map">
