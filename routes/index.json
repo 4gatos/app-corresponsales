@@ -4,5 +4,7 @@
   "steps": { "pattern": "/inicio/pasos", "page": "Steps" },
   "list": { "pattern": "/lista", "page": "List" },
   "battle": { "pattern": "/hito/:id", "page": "Battle" },
-  "correspondent": { "pattern": "/corresponsal/:id", "page": "Correspondent" }
+  "correspondent": { "pattern": "/corresponsal/:id", "page": "Correspondent" },
+  "source": { "pattern": "/fuente/:id", "page": "Source" },
+  "newspaper": { "pattern": "/periodico/:id", "page": "Newspaper" }
 }

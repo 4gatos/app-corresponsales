@@ -19,12 +19,18 @@ const MapPopUp = ({
           <Image publicId={popUpImg} />
         </div>
         <p className="popup-title">{title}</p>
-        <p className="popup-description">{description}</p>
-        <div className="popup-actions">
-          <Link route={route} params={{ id: slug }}>
-            <a className="btn btn-primary">Ver más</a>
-          </Link>
-        </div>
+        {route !== 'source' ? (
+          <p className="popup-description">{description}</p>
+        ) : (
+          description
+        )}
+        {route !== 'source' && (
+          <div className="popup-actions">
+            <Link route={route} params={{ id: slug }}>
+              <a className="btn btn-primary">Ver más</a>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   </CloudinaryContext>

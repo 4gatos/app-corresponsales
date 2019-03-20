@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapPopUp from './MapPopUp';
+import { Link } from '../routes/routes';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicGxhc28iLCJhIjoiY2puZG0weXZ1Mjl6aDNxcmZybXV0NmV6NCJ9.Vovat6h7DIDOWpa5j4P0_Q';
 
@@ -35,7 +36,9 @@ class Map extends Component {
 
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
-    const { battles, correspondants } = this.props;
+    const { battles, correspondants, newspapers, sources } = this.props;
+
+    console.log(sources);
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -54,18 +57,33 @@ class Map extends Component {
       });
     });
 
-    this.createMapMarkers(battles, 'battle', map);
-    this.createMapMarkers(correspondants, 'correspondent', map);
+    battles && battles.length > 0 && this.createMapMarkers(battles, 'battle', map);
+    correspondants && correspondants.length > 0 && this.createMapMarkers(correspondants, 'correspondent', map);
+    newspapers && newspapers.length > 0 && this.createMapMarkers(newspapers, 'newspaper', map);
+    sources && sources.length > 0 && this.createMapMarkers(sources, 'source', map);
 
 
     map.fitBounds(this.bounds, { padding: 60 });
   }
 
   setPopUp(item, route) {
+    let description = item.history || item.historicDetails || item.description;
+    console.log({ item });
+    if (route === 'source' && item.sources && item.sources.length > 0) {
+      description = (
+        <div>
+          { item.sources.map(({ slug, name }) => (
+            <Link route={route} params={{ id: slug }}>
+              <a className="link" style={{ display: 'block' }}>{name}</a>
+            </Link>
+          )) }
+        </div>
+      );
+    }
     this.setState({
       isPopUpOpen: true,
       popUpTitle: item.name,
-      popUpDescription: item.history,
+      popUpDescription: description,
       popUpRoute: route,
       popUpSlug: item.slug,
       popUpImg: item.mainImg,

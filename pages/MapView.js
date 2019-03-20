@@ -23,10 +23,12 @@ class MapView extends Component {
   }
 
   render() {
-    const { battles, correspondants } = this.props;
+    const {
+      battles, correspondants, newspapers, sources,
+    } = this.props;
     return (
       <div className="main-map">
-        {process.browser ? <Map battles={battles} correspondants={correspondants} /> : null}
+        {process.browser ? <Map sources={sources} battles={battles} correspondants={correspondants} newspapers={newspapers} /> : null}
       </div>
     );
   }
@@ -37,16 +39,24 @@ MapView.getInitialProps = async () => {
   const battles = await battleRes.json();
   const correspondantsRes = await fetch(`${config.apiUrl}/correspondants/basic`);
   const correspondants = await correspondantsRes.json();
+  const newspapersRes = await fetch(`${config.apiUrl}/newspapers/basic`);
+  const newspapers = await newspapersRes.json();
+  const sourcesRes = await fetch(`${config.apiUrl}/group-sources`);
+  const sources = await sourcesRes.json();
 
   return {
     battles,
     correspondants,
+    newspapers,
+    sources,
   };
 };
 
 MapView.propTypes = {
   battles: PropTypes.arrayOf(PropTypes.object).isRequired,
   correspondants: PropTypes.arrayOf(PropTypes.object).isRequired,
+  newspapers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sources: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default MapView;
